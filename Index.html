@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Tus Hermosos Ojos</title>
+    <style>
+        :root {
+            --color-rosa: #ff4d6d;
+            --color-tallo: #2d6a4f;
+            --fondo: #0b090a;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--fondo);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: 'Great Vibes', cursive;
+            overflow: hidden;
+            color: white;
+        }
+
+        /* Contenedor del Ramo */
+        .ramo {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Estilo de cada Rosa */
+        .rosa {
+            position: absolute;
+            bottom: 150px;
+            transform-origin: bottom center;
+        }
+
+        /* Pétalos (hechos con círculos CSS) */
+        .petalos {
+            width: 50px;
+            height: 50px;
+            background: var(--color-rosa);
+            border-radius: 50%;
+            position: relative;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.3);
+            animation: florecer 2s ease-out forwards;
+        }
+
+        .petalos::before, .petalos::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: var(--color-rosa);
+            border-radius: 50%;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.3);
+        }
+
+        .petalos::before { left: -15px; top: 10px; }
+        .petalos::after { right: -15px; top: 10px; }
+
+        /* Tallo */
+        .tallo {
+            width: 4px;
+            height: 200px;
+            background: var(--color-tallo);
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+
+        /* Posicionamiento de las flores en el ramo */
+        .r1 { transform: rotate(-20deg) translateX(-40px); }
+        .r2 { transform: rotate(0deg) translateY(-20px); }
+        .r3 { transform: rotate(20deg) translateX(40px); }
+        .r4 { transform: rotate(-10deg) translateX(-20px) translateY(30px); }
+        .r5 { transform: rotate(10deg) translateX(20px) translateY(30px); }
+
+        /* Animación */
+        @keyframes florecer {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+
+        /* Frase */
+        .dedicatoria {
+            margin-top: 50px;
+            text-align: center;
+            padding: 20px;
+            max-width: 80%;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            animation: aparecer 4s ease-in;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: normal;
+            margin-bottom: 10px;
+            color: var(--color-rosa);
+        }
+
+        p {
+            font-size: 1.5rem;
+            line-height: 1.4;
+        }
+
+        @keyframes aparecer {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Pétalos cayendo de fondo */
+        .caida {
+            position: fixed;
+            top: -20px;
+            color: var(--color-rosa);
+            font-size: 20px;
+            user-select: none;
+            pointer-events: none;
+            animation: llover linear forwards;
+        }
+
+        @keyframes llover {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="ramo">
+        <div class="rosa r1"><div class="petalos"></div><div class="tallo"></div></div>
+        <div class="rosa r2"><div class="petalos"></div><div class="tallo"></div></div>
+        <div class="rosa r3"><div class="petalos"></div><div class="tallo"></div></div>
+        <div class="rosa r4"><div class="petalos"></div><div class="tallo"></div></div>
+        <div class="rosa r5"><div class="petalos"></div><div class="tallo"></div></div>
+    </div>
+
+    <div class="dedicatoria">
+        <h1>Tus ojos me encantan...</h1>
+        <p>y este ramo está inspirado en esos hermosos ojos.</p>
+    </div>
+
+    <script>
+        // Lluvia de pétalos constante
+        function crearPetalo() {
+            const petalo = document.createElement('div');
+            petalo.innerHTML = '🌹';
+            petalo.className = 'caida';
+            petalo.style.left = Math.random() * 100 + 'vw';
+            petalo.style.animationDuration = Math.random() * 3 + 2 + 's';
+            petalo.style.opacity = Math.random();
+            document.body.appendChild(petalo);
+            setTimeout(() => petalo.remove(), 5000);
+        }
+        setInterval(crearPetalo, 300);
+    </script>
+
+</body>
+</html>
